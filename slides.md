@@ -11,6 +11,7 @@ fonts:
 class: cover
 layout: iframe
 url: https://humane.tools/links
+scale: 2
 ---
 
 ---
