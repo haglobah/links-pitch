@@ -1,0 +1,338 @@
+/* The app's palette (app/src/index.css). */
+:root {
+  --paper: #f9f5ec;
+  --paper-deep: #efe8d6;
+  --card: #fdfaf2;
+  --ink: #221d14;
+  --ink-soft: #63563f;
+  --line: #e2d8c2;
+  --sky: #00bcff;
+  --sky-deep: #0069a8;
+}
+
+.slidev-layout {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "League Spartan", "Futura", sans-serif;
+  padding: 3.5rem 4rem;
+}
+
+.slidev-layout h1 {
+  font-weight: 700;
+  font-size: 2.6rem;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.5rem;
+}
+.slidev-layout h3 {
+  font-weight: 600;
+  font-size: 1.25rem;
+  margin-bottom: 0.75rem;
+}
+.slidev-layout p,
+.slidev-layout li {
+  color: var(--ink-soft);
+  font-size: 1.3rem;
+  opacity: 1;
+}
+.slidev-layout li {
+  margin: 0.35rem 0;
+}
+.slidev-layout strong {
+  color: var(--ink);
+}
+.slidev-layout code {
+  font-family: "IBM Plex Mono", monospace;
+  background: var(--paper-deep);
+  color: var(--sky-deep);
+  border-radius: 6px;
+  padding: 0.05em 0.35em;
+  font-size: 0.9em;
+}
+
+.sky {
+  color: var(--sky-deep);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  font-weight: 700;
+  font-size: 2.4rem;
+  margin-bottom: 2.5rem;
+}
+.brand img {
+  height: 3.2rem;
+}
+
+.cover h1 {
+  font-size: 4rem;
+  max-width: 16ch;
+}
+.url {
+  font-family: "IBM Plex Mono", monospace;
+  position: absolute;
+  bottom: 3rem;
+  font-size: 1.05rem !important;
+}
+
+/* The default theme fades a paragraph right after a heading. */
+.slidev-layout h1 + p:not(.slidev-vclick-hidden) {
+  opacity: 1 !important;
+}
+.slidev-layout li {
+  line-height: 1.35;
+}
+
+.me-head {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+.portrait {
+  width: 6rem;
+  height: 6rem;
+  border-radius: 50%;
+  border: 2px solid var(--ink);
+  object-fit: cover;
+}
+.me h1 {
+  font-size: 2.4rem;
+  margin: 0;
+}
+.me-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2.5rem;
+  max-width: 46rem;
+  margin: 0 auto;
+}
+.qr {
+  background: var(--card);
+  border: 2px solid var(--ink);
+  border-radius: 16px;
+  box-shadow: 0 5px 0 var(--paper-deep);
+  padding: 1.2rem;
+  text-align: center;
+}
+.qr img {
+  width: 100%;
+  aspect-ratio: 1;
+  image-rendering: pixelated;
+}
+.qr .label {
+  margin-top: 0.6rem;
+  font-weight: 600;
+  color: var(--ink) !important;
+}
+.qr .url {
+  position: static;
+  font-size: 0.85rem !important;
+  margin-top: 0.1rem !important;
+  color: var(--ink) !important;
+}
+
+.statement {
+  text-align: center;
+}
+.problem {
+  display: flex;
+  align-items: baseline;
+  gap: 1.5rem;
+  margin: 1.4rem 0;
+}
+.problem .kicker {
+  font-family: "IBM Plex Mono", monospace;
+  color: var(--sky-deep);
+}
+.problem h1 {
+  margin: 0;
+}
+.statement h1 {
+  font-size: 3.4rem;
+}
+.statement p {
+  font-size: 2rem !important;
+  margin-top: 1.5rem !important;
+}
+.big {
+  font-size: 2rem !important;
+  line-height: 1.3 !important;
+  color: var(--ink) !important;
+}
+
+/* One slide, three columns, each half the slide wide. The track pans and
+   zooms by stage: 0 column one centred, 1 columns one and two, 2 columns two
+   and three, 3 all three zoomed out, 4 zoomed into column one for the demo. */
+.pan {
+  /* Bleed past the layout's side padding so each column gets half the slide. */
+  margin: 0 -4rem;
+  overflow: hidden;
+  padding-top: 1.5rem;
+}
+.pan-track {
+  display: flex;
+  width: 150%;
+  transform-origin: left top;
+  transition: transform 0.7s cubic-bezier(0.65, 0, 0.35, 1);
+}
+.pan-col {
+  flex: 0 0 calc(100% / 3);
+  padding: 0 1.5rem 0 4rem;
+  transition: opacity 0.5s ease;
+}
+.pan-track[data-stage="0"] { transform: translateX(calc(100% / 6)); }
+.pan-track[data-stage="1"] { transform: translateX(0); }
+.pan-track[data-stage="2"] { transform: translateX(calc(-100% / 3)); }
+.pan-track[data-stage="3"] { transform: scale(calc(2 / 3)); }
+/* Scale by --z about the left edge, then shift column one's centre (a sixth
+   of the track) back to the slide's centre (a third of it). */
+.pan-track[data-stage="4"] {
+  --z: 1.25;
+  transform: translateX(calc(100% / 3 - 100% / 6 * var(--z))) scale(var(--z));
+}
+.pan-track[data-stage="0"] .pan-col:nth-child(n + 2),
+.pan-track[data-stage="4"] .pan-col:nth-child(n + 2),
+.pan-track[data-stage="1"] .pan-col:nth-child(3),
+.pan-track[data-stage="2"] .pan-col:nth-child(1) {
+  opacity: 0;
+}
+
+/* A strikethrough that draws itself left to right once .struck lands. */
+.strike {
+  background: linear-gradient(currentColor, currentColor) no-repeat 0 58% / 0% 0.09em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  transition: background-size 0.45s ease-out;
+}
+.strike.struck {
+  background-size: 100% 0.09em;
+}
+
+/* The demo stage: the heading gives way to a Demo marker, and the want being
+   demoed is lit while the others dim. */
+.col-head {
+  display: grid;
+}
+.col-head > * {
+  grid-area: 1 / 1;
+  transition: opacity 0.5s ease;
+}
+.demo-label {
+  font-family: "IBM Plex Mono", monospace;
+  color: var(--sky-deep) !important;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 2rem !important;
+  font-weight: 700;
+  line-height: 1.1;
+  margin: 0 !important;
+}
+.col-head .demo-label {
+  opacity: 0;
+}
+.pan-track[data-stage="4"] .col-head h3 {
+  opacity: 0;
+}
+.pan-track[data-stage="4"] .demo-label {
+  opacity: 1;
+}
+/* Dim the children: v-click owns the row's own opacity. */
+.pan-col .problem > * {
+  transition: opacity 0.5s ease;
+}
+.pan-col .problem h1 {
+  transition: font-size 0.7s cubic-bezier(0.65, 0, 0.35, 1);
+}
+.pan-track[data-stage="4"] .problem:not(.current) > * {
+  opacity: 0.3;
+}
+.pan-track[data-stage="4"] .current h1 {
+  font-size: 2.25rem !important;
+}
+/* The last slide: two cards, each a phone screen beside its QR, and the
+   maker beneath. */
+.outro {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: minmax(0, 1fr) auto;
+  gap: 1.25rem 1.5rem;
+  /* The slide's height less the layout's vertical padding. */
+  height: calc(552px - 7rem);
+}
+.card {
+  background: var(--card);
+  border: 2px solid var(--ink);
+  border-radius: 16px;
+  box-shadow: 0 5px 0 var(--paper-deep);
+  /* No bottom padding: the phone runs off the card's lower edge. */
+  padding: 1.1rem 1.2rem 0;
+  display: flex;
+  gap: 1rem;
+  min-height: 0;
+  overflow: hidden;
+}
+.card-text {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.4rem;
+}
+.card-icon {
+  width: 2.6rem;
+}
+.outro h1 {
+  font-size: 2rem;
+  line-height: 1;
+  margin: 0;
+}
+.outro .url {
+  position: static;
+  margin: 0 !important;
+  color: var(--ink) !important;
+}
+.card .url {
+  font-size: 0.8rem !important;
+}
+.qr-img {
+  width: 5rem;
+  image-rendering: pixelated;
+}
+.card .qr-img {
+  margin-top: auto;
+  margin-bottom: 1.2rem;
+}
+.phone {
+  width: 13.5rem;
+  flex: none;
+  overflow: hidden;
+  border: 6px solid var(--ink);
+  border-bottom: 0;
+  border-radius: 26px 26px 0 0;
+}
+.phone img {
+  display: block;
+  width: 100%;
+}
+.maker {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+}
+.maker .portrait {
+  width: 4rem;
+  height: 4rem;
+}
+.maker .url {
+  font-size: 1.3rem !important;
+}
+.maker .qr-img {
+  width: 4rem;
+}
